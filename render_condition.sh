@@ -2,17 +2,20 @@
 #replace with python. Script is over 20 lines.
 source $HOME/blender-render-script/render_lib.sh
 render_server=$HOSTNAME
+attempt=1
 gcloud compute config-ssh
 
 for i in $HOME/3D-Rot-me/*.blend; do
   j=$(basename $i .blend)
-  echo "$(date) blender is running..." >> blender_running.txt
   while [ $next_frame -lt $end_frame ]; do
+    ssh $director_server 'echo "$(date) Blender is running..." \
+      >> $HOME/log.txt'
     blender -b $(basename $i) -o /home/ubuntu/3D-Rot-$j/jpg/#.jpg\
     -E CYCLES -F JPG -s $next_frame -e $end_frame -a
     next_frame=basename $(ls -1 $HOME/3D-Rot-$j/jpg | sort -g | tail -1) \
       .jpg
-    rm blender_running.txt
+    ssh $director_server 'echo "$(date) Blender stopped..." \
+      >> $HOME/log.txt'
     attempt=$((attempt+1))
     if [$attempt -gt $limit]; then
       ssh $director_server 'echo "$(date) Something is not right. \
@@ -21,8 +24,8 @@ for i in $HOME/3D-Rot-me/*.blend; do
         $HOME/not_rendered'
       break
     else
-      ssh $director_server 'echo "$(date) Render was interrupted. Attempt \
-        no. $attempt" >> $HOME/log.txt'
+      ssh $director_server 'echo "$(date) Render has stopped. Checking \
+        if things are OK. Attempt no. $attempt" >> $HOME/log.txt'
     fi
   done
   ssh $director_server 'echo "$(date) Render successful." >> $HOME/log.txt'
