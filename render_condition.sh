@@ -1,6 +1,6 @@
 #!/bin/sh
 #replace with python. Script is over 20 lines.
-source $HOME/blender-render-script/render_lib.sh
+source /home/ubuntu/blender-render-script/render_lib.sh
 render_server=$HOSTNAME
 gcloud compute config-ssh
 
@@ -8,7 +8,7 @@ for i in $HOME/3D-Rot-me/*.blend; do
   j=basename $i .blend
   echo "$(date) blender is running..." >> blender_running.txt
   while [ $next_frame -lt $end_frame ]; do
-    blender -b $(basename $i) -o $HOME/3D-Rot-$j/jpg/#.jpg\
+    blender -b $(basename $i) -o /home/ubuntu/3D-Rot-$j/jpg/#.jpg\
     -E CYCLES -F JPG -s $next_frame -e $end_frame -a
     next_frame=basename $(ls -1 $HOME/3D-Rot-$j/jpg | sort -g | tail -1) \
       .jpg
