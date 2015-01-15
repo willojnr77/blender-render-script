@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 #replace with python. Script is over 20 lines.
-source /home/ubuntu/blender-render-script/render_lib.sh
+source $HOME/blender-render-script/render_lib.sh
 render_server=$HOSTNAME
 gcloud compute config-ssh
 

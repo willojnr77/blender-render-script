@@ -1,10 +1,10 @@
-#!/bin/sh
+#!/bin/bash
 
-source /home/ubuntu/blender-render-script/render_lib.sh
+source $HOME/blender-render-script/render_lib.sh
 
 count=1
 
-for i in /home/ubuntu/to_be_rendered/*.blend; do
+for i in $HOME/to_be_rendered/*.blend; do
   gcloud compute --project "spartan-lacing-691" disks create \
     "blender-render-server-$count" --zone "us-central1-b" \
     --source-snapshot "blender-render-server-snap-05" \
@@ -29,6 +29,6 @@ for i in /home/ubuntu/to_be_rendered/*.blend; do
 
   scp $i $render_server:3D-Rot-me
   ssh $render_server 'at -f $HOME/blender-render-script/render_condition.sh now'
-  mv $i /home/ubuntu/being_rendered
+  mv $i $HOME/being_rendered
   count=$((count+1))
 done
