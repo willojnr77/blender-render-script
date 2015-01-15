@@ -2,7 +2,7 @@
 
 source $HOME/blender-render-script/render_lib.sh
 
-count=1
+count=100
 
 for i in $HOME/to_be_rendered/*.blend; do
   gcloud compute --project "spartan-lacing-691" disks create \
