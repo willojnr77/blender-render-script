@@ -2,7 +2,7 @@
 #replace with python. Script is over 20 lines.
 source $HOME/blender-render-script/render_lib.sh
 render_server=$HOSTNAME
-attempt=1
+attempt=0
 gcloud compute config-ssh
 
 for i in $HOME/3D-Rot-me/*.blend; do
