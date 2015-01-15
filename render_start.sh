@@ -22,8 +22,7 @@ for i in $HOME/to_be_rendered/*.blend; do
 
   gcloud compute config-ssh
 
-  render_server=ubuntu@blender-render-server-$count.us-central1-b.\
-    spartan-lacing-691
+  render_server=ubuntu@blender-render-server-$count.us-central1-b.spartan-lacing-691
 
   ssh $render_server 'cd $HOME/blender-render-script/ && git pull origin master'
 
