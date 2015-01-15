@@ -27,8 +27,7 @@ for i in $HOME/3D-Rot-me/*.blend; do
   ssh $director_server 'echo "$(date) Render successful." >> $HOME/log.txt'
   ssh $director_server 'mv $HOME/being_rendered $HOME/rendered'
   ssh $director_server 'mkdir -p $HOME/rendered_images/3D-Rot-$j/jpg'
-  scp $HOME/3D-Rot-$j/jpg $director_server:$HOME/rendered_images/\
-    3D-Rot-$j/jpg
+  scp $HOME/3D-Rot-$j/jpg $director_server:rendered_images/3D-Rot-$j/jpg
 done
 #shutdown sequence
 ssh $director_server 'echo "$(date) Shutting down $render_server." \

@@ -27,7 +27,7 @@ for i in $HOME/to_be_rendered/*.blend; do
 
   ssh $render_server 'cd $HOME/blender-render-script/ && git pull origin master'
 
-  scp $i $render_server:/home/ubuntu/3D-Rot-me/
+  scp $i $render_server:3D-Rot-me
   ssh $render_server 'at -f $HOME/blender-render-script/render_condition.sh now'
   mv $i $HOME/being_rendered
   count=$((count+1))
