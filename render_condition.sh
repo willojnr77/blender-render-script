@@ -6,11 +6,11 @@ attempt=0
 gcloud compute config-ssh
 
 for i in $HOME/3D-Rot-me/*.blend; do
-  j=$(basename $i .blend)
+  j=${i%%.*}
   while [ $next_frame -lt $end_frame ]; do
     ssh $director_server 'echo "$(date) Blender is running..." \
       >> $HOME/log.txt'
-    blender -b $(basename $i) -o /home/ubuntu/3D-Rot-$j/jpg/#.jpg\
+    blender -b $HOME/3D-Rot-me/$i -o $HOME/3D-Rot-$j/jpg/#.jpg\
     -E CYCLES -F JPG -s $next_frame -e $end_frame -a
     next_frame=basename $(ls -1 $HOME/3D-Rot-$j/jpg | sort -g | tail -1) \
       .jpg

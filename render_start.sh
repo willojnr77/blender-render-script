@@ -2,7 +2,7 @@
 
 source $HOME/blender-render-script/render_lib.sh
 
-count=100
+count=1
 
 for i in $HOME/to_be_rendered/*.blend; do
   gcloud compute --project "spartan-lacing-691" disks create \
@@ -20,6 +20,7 @@ for i in $HOME/to_be_rendered/*.blend; do
     "device-name=blender-render-server-$count" \
     "mode=rw" "boot=yes" "auto-delete=yes"
 
+  sleep 120
   gcloud compute config-ssh
 
   render_server=ubuntu@blender-render-server-$count.us-central1-b.spartan-lacing-691
