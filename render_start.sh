@@ -24,9 +24,14 @@ for i in $HOME/to_be_rendered/*.blend; do
   render_server=ubuntu@blender-render-server-$count.us-central1-b.spartan-lacing-691
 
   ssh $render_server 'cd $HOME/blender-render-script/ && git pull origin master'
-
-  scp $i $render_server:$HOME/3D-Rot-me
-  ssh $render_server 'at -f $HOME/blender-render-script/render_condition.sh now'
-  mv $i $HOME/being_rendered
-  count=$((count+1))
+  if [ ! -z "$i" ]; then
+    scp $i $render_server:$HOME/3D-Rot-me
+    echo "$(date) Copied file to server. Commence render_conditions" >> $HOME/log.txt
+    ssh $render_server 'at -f $HOME/blender-render-script/render_condition.sh now'
+    mv $i $HOME/being_rendered
+    count=$((count+1))
+  else
+    echo "$(date) Blend file not found. Deleting render server instance." >> $HOME/log.txt
+    gcloud compute instances delete blender-render-server-$count
+  fi
 done
