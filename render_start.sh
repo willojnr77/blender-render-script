@@ -32,6 +32,6 @@ for i in $HOME/to_be_rendered/*.blend; do
     count=$((count+1))
   else
     echo "$(date) Blend file not found. Deleting render server instance." >> $HOME/log.txt
-    gcloud compute instances delete blender-render-server-$count
+    gcloud compute instances delete blender-render-server-$count --quiet --zone "us-central1-b"
   fi
 done

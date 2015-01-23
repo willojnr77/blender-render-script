@@ -40,4 +40,4 @@ for i in $(ls $HOME/3D-Rot-me/*.blend); do
 done
 #shutdown sequence
 ssh $director_server "echo \"$(date) Shutting down $HOSTNAME .\" >> $HOME/log.txt"
-ssh $director_server "gcloud compute instances delete $HOSTNAME"
+ssh $director_server "gcloud compute instances delete $HOSTNAME --quiet --zone \"us-central1-b\""
