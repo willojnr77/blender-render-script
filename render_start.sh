@@ -5,7 +5,7 @@ count=1
 for i in $HOME/to_be_rendered/*.blend; do
   gcloud compute --project "spartan-lacing-691" disks create \
     "blender-render-server-$count" --zone "us-central1-b" \
-    --source-snapshot "blender-render-server-snap-05" \
+    --source-snapshot "blender-render-server-snap-06" \
     --type "pd-standard"
 
   gcloud compute --project "spartan-lacing-691" instances create \
