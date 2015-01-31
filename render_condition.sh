@@ -21,8 +21,8 @@ for i in $(ls $HOME/3D-Rot-me/*.blend); do
       >> $HOME/log.txt"
     attempt=$((attempt+1))
     if [ $attempt -gt $limit ]; then
-      ssh $director_server "echo '$(date) Something is not right. \
-        Check .blend file' >> $HOME/log.txt"
+      ssh $director_server "echo \"$(date) Something is not right. Check .blend file\" \
+        >> $HOME/log.txt"
       ssh $director_server "mv $HOME/being_rendered/$j.blend \
         $HOME/not_rendered"
       break
@@ -39,5 +39,5 @@ for i in $(ls $HOME/3D-Rot-me/*.blend); do
   done
 done
 #shutdown sequence
-ssh $director_server "echo \"$(date) Shutting down $HOSTNAME .\" >> $HOME/log.txt"
-ssh $director_server "gcloud compute instances delete $HOSTNAME --quiet --zone \"us-central1-b\""
+ssh $director_server "echo \"$(date) Shutting down $(hostname).\" >> $HOME/log.txt"
+ssh $director_server "gcloud compute instances delete $(hostname) --quiet --zone \"us-central1-b\""
