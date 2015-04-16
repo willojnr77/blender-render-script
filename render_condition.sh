@@ -2,7 +2,7 @@
 #replace with python. Script is over 20 lines.
 director_server=ubuntu@blender-director.us-central1-b.spartan-lacing-691
 next_frame=1
-end_frame=30
+end_frame=60
 attempt=0
 limit=2
 
@@ -13,10 +13,10 @@ for i in $(ls $HOME/3D-Rot-me/*.blend); do
   while [ $next_frame -lt $end_frame ]; do
     ssh $director_server "echo \"$(date) Blender is running...\" \
       >> $HOME/log.txt"
-    blender -b $HOME/3D-Rot-me/$j.blend -o $HOME/3D-Rot-$j/jpg/#.jpg -E CYCLES \
-      -F JPG -s $next_frame -e $end_frame -a
-    next_frame=$(basename $(ls -1 $HOME/3D-Rot-$j/jpg | sort -g | tail -1) \
-      .jpg)
+    blender -b $HOME/3D-Rot-me/$j.blend -o $HOME/3D-Rot-$j/png/#.png -E CYCLES \
+      -F PNG -s $next_frame -e $end_frame -a
+    next_frame=$(basename $(ls -1 $HOME/3D-Rot-$j/png | sort -g | tail -1) \
+      .png)
     ssh $director_server "echo \"$(date) Blender stopped...\" \
       >> $HOME/log.txt"
     attempt=$((attempt+1))
