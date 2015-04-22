@@ -14,7 +14,7 @@ for i in $(ls $HOME/3D-Rot-me/*.blend); do
     ssh $director_server "echo \"$(date) Blender is running...\" \
       >> $HOME/log.txt"
     blender -b $HOME/3D-Rot-me/$j.blend -o $HOME/3D-Rot-$j/jpg/#.jpg -E CYCLES \
-      -F PNG -s $next_frame -e $end_frame -a
+      -F JPEG -s $next_frame -e $end_frame -a
     next_frame=$(basename $(ls -1 $HOME/3D-Rot-$j/jpg | sort -g | tail -1) \
       .jpg)
     ssh $director_server "echo \"$(date) Blender stopped...\" \
