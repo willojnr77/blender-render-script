@@ -1,6 +1,6 @@
 #!/bin/bash
 
-count=1
+count=2
 
 for i in $HOME/to_be_rendered/*.blend; do
   gcloud compute --project "spartan-lacing-691" disks create \
