@@ -23,7 +23,7 @@ for i in $HOME/to_be_rendered/*.blend; do
 
   render_server=ubuntu@blender-render-server-$count.us-central1-b.spartan-lacing-691
 
-  ssh $render_server 'cd $HOME/blender-render-script/ && git pull origin solar-${count}'
+  ssh $render_server "cd \$HOME/blender-render-script/ && git pull origin solar-$count"
   if [[ $i != "$HOME/to_be_rendered/*.blend" ]]; then
     scp $i $render_server:$HOME/3D-Rot-me
     echo "$(date) Copied file to server. Commence render_conditions" >> $HOME/log.txt
