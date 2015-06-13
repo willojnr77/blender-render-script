@@ -10,7 +10,7 @@ for i in $HOME/to_be_rendered/*.blend; do
 
   gcloud compute --project "spartan-lacing-691" instances create \
     "blender-render-server-$count" --zone "us-central1-b" \
-    --machine-type "n1-highcpu-16" --network "default" \
+    --machine-type "n1-highcpu-32" --network "default" \
     --maintenance-policy "MIGRATE" \
     --scopes "https://www.googleapis.com/auth/compute" \
     "https://www.googleapis.com/auth/devstorage.full_control" \
