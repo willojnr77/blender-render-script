@@ -2,7 +2,7 @@
 #replace with python. Script is over 20 lines.
 director_server=ubuntu@blender-director.us-central1-b.spartan-lacing-691
 next_frame=4433
-end_frame=4932
+end_frame=4682
 attempt=0
 limit=2
 
